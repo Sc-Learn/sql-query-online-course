@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS material (
   course_id VARCHAR(36) NOT NULL,
   title VARCHAR(50) NOT NULL,
   content TEXT,
-  order INT NOT NULL,
-  UNIQUE(course_id, order),
+  `order` INT NOT NULL,
+  UNIQUE(course_id, `order`),
   FOREIGN KEY (course_id) REFERENCES course(course_id)
 );
 
@@ -139,10 +139,10 @@ SELECT * FROM admin;
 
 -- 28. Tambahkan data ke table 'student'
 INSERT INTO student (student_id, name, phone_number, last_education, email, password, birth_date, address) VALUES
-  ('550e8400-e29b-41d4-a716-446655440010, 'student-zidan', '089512341111', 'SMA/SMK', 'zidan@gmail.com', 'student123', '1998-12-05', 'Jl. Raya No. 1, Bekasi'),
-  ('550e8400-e29b-41d4-a716-446655440011, 'student-ferdian', '089512342222', 'D3', 'ferdian@gmail.com', 'student123', '2005-08-04', 'Jl. Manggis No. 2, Jakarta'),
-  ('550e8400-e29b-41d4-a716-446655440012, 'student-farhan', '089512343333', 'S1', 'farhan@gmail.com', 'student123', '1945-07-17', 'Jl. Merdeka No. 3, Jakarta'),
-  ('550e8400-e29b-41d4-a716-446655440013, 'student-chris', '089512344444', 'others', 'chris@gmail.com', 'student123', '1901-09-09', 'Jl. Kebon No. 4, Jakarta');
+  ('550e8400-e29b-41d4-a716-446655440010', 'student-zidan', '089512341111', 'SMA/SMK', 'zidan@gmail.com', 'student123', '1998-12-05', 'Jl. Raya No. 1, Bekasi'),
+  ('550e8400-e29b-41d4-a716-446655440011', 'student-ferdian', '089512342222', 'D3', 'ferdian@gmail.com', 'student123', '2005-08-04', 'Jl. Manggis No. 2, Jakarta'),
+  ('550e8400-e29b-41d4-a716-446655440012', 'student-farhan', '089512343333', 'S1', 'farhan@gmail.com', 'student123', '1945-07-17', 'Jl. Merdeka No. 3, Jakarta'),
+  ('550e8400-e29b-41d4-a716-446655440013', 'student-chris', '089512344444', 'others', 'chris@gmail.com', 'student123', '1901-09-09', 'Jl. Kebon No. 4, Jakarta');
 
 -- 29. Tampilkan semua data yang ada di table 'student'
 SELECT * FROM student;
@@ -175,13 +175,13 @@ UPDATE course SET title = 'PHP Programming Basic' WHERE title = 'PHP Programming
 SELECT * FROM course where course_id = '550e8400-e29b-41d4-a716-446655440030';
 
 -- 35. Hapus data pada table 'course' dengan title 'Cara menjadi ganteng'
-DELETE FROM course WHERE id = '550e8400-e29b-41d4-a716-446655440037';
+DELETE FROM course WHERE course_id = '550e8400-e29b-41d4-a716-446655440037';
 
 -- 36. Tampilkan semua data yang ada di table 'course'
 SELECT * FROM course;
 
 -- 37. Tambahkan data ke table 'material'
-INSERT INTO material (material_id, course_id, title, content, order) VALUES
+INSERT INTO material (material_id, course_id, title, content, `order`) VALUES
   ('550e8400-e29b-41d4-a716-446655440040', '550e8400-e29b-41d4-a716-446655440030', 'Sejarah PHP', 'PHP Dibuat pada tahun 1995', 1),
   ('550e8400-e29b-41d4-a716-446655440041', '550e8400-e29b-41d4-a716-446655440030', 'Variable', 'Variable adalah tempat untuk menyimpan data', 2),
   ('550e8400-e29b-41d4-a716-446655440042', '550e8400-e29b-41d4-a716-446655440030', 'Perulangan', 'Perulangan adalah proses mengulang sesuatu', 3),
@@ -194,8 +194,8 @@ INSERT INTO material (material_id, course_id, title, content, order) VALUES
   ('550e8400-e29b-41d4-a716-446655440050', '550e8400-e29b-41d4-a716-446655440034', 'Sejarah Laravel', 'Laravel Dibuat pada tahun 2011', 1);
 
 -- 38. Mencoba constraint unique pada table 'material'
-INSERT INTO material (material_id, course_id, title, content, order) VALUES
-  ('550e8400-e29b-41d4-a716-446655440040', '550e8400-e29b-41d4-a716-446655440030', 'Sejarah PHP', 'PHP Dibuat pada tahun 1995', 1);
+INSERT INTO material (material_id, course_id, title, content, `order`) VALUES
+  ('550e8400-e29b-41d4-a716-446655440051', '550e8400-e29b-41d4-a716-446655440030', 'Sejarah PHP', 'PHP Dibuat pada tahun 1995', 1);
 
 -- 39. Tampilkan semua data yang ada di table 'material'
 SELECT * FROM material;
@@ -217,7 +217,7 @@ INSERT INTO feedback (course_id, student_id, comment, rating) VALUES
   ('550e8400-e29b-41d4-a716-446655440030', '550e8400-e29b-41d4-a716-446655440013', 'Luar biasa', 5),
   ('550e8400-e29b-41d4-a716-446655440031', '550e8400-e29b-41d4-a716-446655440010', 'Kurengg', 2),
   ('550e8400-e29b-41d4-a716-446655440032', '550e8400-e29b-41d4-a716-446655440011', 'Anjay Keren', 3),
-  ('550e8400-e29b-41d4-a716-446655440032', '550e8400-e29b-41d4-a716-446655440012', 'Bolehh juga', 4),
+  ('550e8400-e29b-41d4-a716-446655440032', '550e8400-e29b-41d4-a716-446655440012', 'Bolehh juga', 4);
 
 -- 44. Mencoba constraint check pada table 'feedback'
 INSERT INTO feedback (course_id, student_id, comment, rating) VALUES
@@ -241,25 +241,41 @@ INSERT INTO enrollment (course_id, student_id, purchased_at, total_payment, stat
 -- 47. Tampilkan semua data yang ada di table 'enrollment'
 SELECT * FROM enrollment;
 
--- 48. Tampilkan data course yang statusnya 'published' dan levelnya 'beginner'
-SELECT * FROM course WHERE status = 'published' AND level = 'beginner';
+-- 48. Tampilkan column title, description dan retail price pada data course yang statusnya 'published' dan levelnya 'beginner'
+SELECT 
+  title,
+  description,
+  retail_price,  
+FROM course
+WHERE status = 'published' AND level = 'beginner';
 
--- 49. Tampilkan data course yang statusnya bukan 'draft' dan levelnya beginner atau intermediate diurutkan berdasarkan harga dari yang termurah
-SELECT * 
-FROM course 
+-- 49. Tampilkan column title, description dan retail price pada data course yang statusnya bukan 'draft' dan levelnya beginner atau intermediate diurutkan berdasarkan harga dari yang termurah
+SELECT 
+  title,
+  description,
+  retail_price
+FROM course
 WHERE status != 'draft' AND level IN ('beginner', 'intermediate') ORDER BY price ASC;
 
--- 50. Tampilkan data course yang title-nya mengandung kata 'PHP' atau 'Laravel'
-SELECT * 
-FROM course 
+-- 50. Tampilkan column title, description dan retail price pada  data course yang title-nya mengandung kata 'PHP' atau 'Laravel'
+SELECT
+  c.title,
+  c.description,
+  c.retail_price
+FROM course
 WHERE title LIKE '%PHP%' OR title LIKE '%Laravel%';
 
--- 51. Tampilkan data course yang price-nya berada di range 100000 sampai 300000
-SELECT * FROM course WHERE price BETWEEN 100000 AND 300000;
+-- 51. Tampilkan column title, description dan price data course yang price-nya berada di range 100000 sampai 300000
+SELECT 
+  title,
+  description,
+  price
+FROM course 
+WHERE price BETWEEN 100000 AND 300000;
 
 -- 52. Tampilkan data enrollment beserta nama course dan nama student yang status_payment-nya 'success' diurutkan berdasarkan student_id dan total_payment dari yang terkecil
 SELECT 
-  s.name, c.title, e.*  
+  s.name, c.title AS title_course, e.*  
 FROM enrollment e 
 JOIN course c ON e.course_id = c.course_id 
 JOIN student s ON e.student_id = s.student_id 
@@ -274,32 +290,32 @@ FROM student s
 JOIN enrollment e ON s.student_id = e.student_id 
 GROUP BY s.student_id;
 
--- 54. Tampilkan data course dan diskon dengan rumus (price - retail_price) / retail_price * 100
+-- 54. Tampilkan nama, price dan retail_price pada data course dan tambahkan kolom discount dengan rumus (price - retail_price) / retail_price * 100
 SELECT 
   c.*, 
-  ((c.price - c.retail_price) / c.retail_price * 100) as discount 
+  ROUND(((c.price - c.retail_price) / price) * 100, 1) as discount 
 FROM course c;
 
--- 55. Tampilkan data course dan jumlah feedback yang diberikan oleh student dan rata-rata rating yang diberikan dan tambahkan column 'rating' yang berisi 'good' jika rata-rata rating >= 4, 'average' jika rata-rata rating >= 3, 'bad' jika rata-rata rating < 3
+-- 55. Tampilkan title course dan jumlah feedback yang diberikan oleh student dan rata-rata rating yang diberikan dan tambahkan column 'rating' yang berisi 'good' jika rata-rata rating >= 4, 'average' jika rata-rata rating >= 3, 'bad' jika rata-rata rating < 3 dan 'Unrated' jika tidak ada rating
 SELECT
-	c.*,
-	COUNT(f.feedback_id) AS total_feedback,
-	AVG(f.rating) AS avg_rating,
-	CASE
-		WHEN AVG(f.rating) >= 4 THEN 'good'
-		WHEN AVG(f.rating) >= 3 THEN 'average'
-		ELSE 'bad'
-	END AS rating
+  c.title,
+  COUNT(f.feedback_id) AS total_feedback,
+  ROUND(AVG(f.rating), 1) AS avg_rating,
+  CASE
+    WHEN ROUND(AVG(f.rating), 1) >= 4 THEN 'good'
+    WHEN ROUND(AVG(f.rating), 1) >= 3 THEN 'average'
+    WHEN ROUND(AVG(f.rating), 1) IS NULL THEN 'Unrated'
+    ELSE 'bad'
+  END AS rating
 FROM
-	course c
-LEFT JOIN feedback f ON
-	c.course_id = f.course_id
+    course c
+LEFT JOIN feedback f ON c.course_id = f.course_id
 GROUP BY
-	c.course_id;
+    c.title;
 
--- 56. Tampilkan data course dan jumlah student yang mengambil course tersebut dan tambahkan column 'label' yang berisi 'popular' jika jumlah student > 3, 'normal' jika jumlah student >= 2, 'unpopular' jika jumlah student < 2
+-- 56. Tampilkan title course dan jumlah student yang mengambil course tersebut dan tambahkan column 'label' yang berisi 'popular' jika jumlah student > 3, 'normal' jika jumlah student >= 2, 'unpopular' jika jumlah student < 2
 SELECT
-  c.*,
+  c.title,
   COUNT(e.student_id) AS total_student,
   IF (COUNT(e.student_id) > 3, 
     'popular', 
@@ -312,4 +328,4 @@ FROM
   course c
 LEFT JOIN enrollment e ON c.course_id = e.course_id
 GROUP BY
-  c.course_id;
+  c.title;
