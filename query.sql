@@ -329,3 +329,6 @@ FROM
 LEFT JOIN enrollment e ON c.course_id = e.course_id
 GROUP BY
   c.title;
+
+-- 57. Tampilkan jumlah dari semua total payment pada table enrollment
+SELECT SUM(total_payment) AS total_payment FROM enrollment; 
